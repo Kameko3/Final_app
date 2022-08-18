@@ -94,7 +94,7 @@ def main():
 			#画像アップロード 
 			img = st.file_uploader("画像アップロード", type='jpg')
 			if img is not None:
-				st.image(img, use_column_width = True)
+				st.image(img, use_column_width = True) 	#画像サイズを画面サイズに合わせて調整
 
 			#＜＜＜機械学習パート＞＞＞
 			# # 前処理用の関数
