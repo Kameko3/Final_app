@@ -49,22 +49,22 @@ def view_all_users():
 	return data
 
 #メイン画面
-def main():
-	"""動物ずかん"""
+# def main():
+	# """動物ずかん"""
 
-	st.title("動物ずかん")
+st.title("動物ずかん")
 
-	choice = st.sidebar.selectbox(
+choice = st.sidebar.selectbox(
 			"Menu",
 			["Home","Login","SignUp"],
 	)	
 
-	#ホーム
-	if choice == "Home":
+#ホーム
+if choice == "Home":
 		st.subheader("🐶犬 🐱猫 🐴馬 🐦鳥 🦌鹿 🐸蛙")
 
-	#サインアップ
-	elif choice == "SignUp":
+#サインアップ
+elif choice == "SignUp":
 		st.subheader("Create New Account")
 		new_user = st.text_input("Username")
 		new_password = st.text_input("Password",type='password')
@@ -75,8 +75,8 @@ def main():
 			st.success("You have successfully created a valid Account")
 			st.info("Go to Login Menu to login")
 
-	#ログイン
-	elif choice == "Login":
+#ログイン
+elif choice == "Login":
 		st.subheader("Login Section")
 		username = st.sidebar.text_input("User Name")
 		password = st.sidebar.text_input("Password",type='password')
@@ -90,11 +90,8 @@ def main():
 				st.success("Logged In as {}".format(username))
 
 				###login後にアップ画面表示->インデント下げる->アップロードすると消える
-				#仮説１）アップロードすると、main()が実行されて、Loginの初期画面が表示されてしまっているのでは？
-				#　　　　　⇒test2でdef mainをやめても同様の現象が発生
-				#仮説２）（上手くいっているtest1との比較から）サイドバー×セレクトボックスで
-				# 　　　　右ページに表示させる構造に問題あり？画像をアップロードさせると”画面更新？”がかかり、
-				#　　　　　login前の初期画面に遷移してしまう？
+				###アップロードすると、main()が実行されて、Loginの初期画面が表示されてしまっているのでは？
+				###⇒最終行のif文に飛ばないようにするには？
 
 				#画像アップロード 
 				img = st.file_uploader("画像アップロード", type='jpg')
@@ -184,7 +181,7 @@ def main():
 			else:
 				st.warning("Incorrect Username/Password")	
 
-# if __name__ == '__main__'は「該当のファイルがコマンドラインから
+#if __name__ == '__main__'は「該当のファイルがコマンドラインから
 # スクリプトとして実行された場合にのみ以降の処理を実行する
-if __name__ == '__main__':
-	main()
+# if __name__ == '__main__':
+# 	main()
