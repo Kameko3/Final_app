@@ -48,6 +48,31 @@ def view_all_users():
 	data = c.fetchall()
 	return data
 
+# 機械学習
+# 前処理用の関数
+def transform(img):
+	_transform = transforms.Compose([
+			transforms.Resize(256),
+			transforms.CenterCrop(224),
+			transforms.ToTensor(),
+			transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+	])
+	return _transform(img)
+
+#学習モデル
+class Net(pl.LightningModule):	
+
+	def __init__(self):
+			super().__init__()
+
+			self.feature = resnet18(pretrained=True)
+			self.fc = nn.Linear(1000, 10)
+
+	def forward(self, x):
+			h = self.feature(x)
+			h = self.fc(h)
+			return h
+
 #メイン画面
 def main():
 	"""動物ずかん"""
@@ -61,7 +86,8 @@ def main():
 
 	#ホーム
 	if choice == "Home":
-		st.subheader("🐶犬 🐱猫 🐴馬 🐦鳥 🦌鹿 🐸蛙")
+		st.subheader("🐶🐱🐴🐦🦌🐸")
+		st.subheader("犬・猫・馬・鳥・鹿・蛙の図鑑です。")
 
 	#サインアップ
 	elif choice == "SignUp":
@@ -88,47 +114,14 @@ def main():
 
 			if result: #ログイン成功　
 				st.success("Logged In as {}".format(username))
-
-				###login後にアップ画面表示->インデント下げる->アップロードすると消える
-				#仮説１）アップロードすると、main()が実行されて、Loginの初期画面が表示されてしまっているのでは？
-				#　　　　　⇒test2でdef mainをやめても同様の現象が発生
-				#仮説２）（上手くいっているtest1との比較から）サイドバー×セレクトボックスで
-				# 　　　　右ページに表示させる構造に問題あり？画像をアップロードさせると”画面更新？”がかかり、
-				#　　　　　login前の初期画面に遷移してしまう？
-
 				#画像アップロード 
 				img = st.file_uploader("画像アップロード", type='jpg')
+				
+				#画像表示
 				if img is not None:
 					st.image(img, use_column_width = True) 	#画像サイズを画面サイズに合わせて調整
 
-					print(0)
-
-					#＜＜＜機械学習パート＞＞＞
-					# # 前処理用の関数
-					def transform(img):
-						_transform = transforms.Compose([
-								transforms.Resize(256),
-								transforms.CenterCrop(224),
-								transforms.ToTensor(),
-								transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-						])
-						return _transform(img)
-
-					#学習モデル
-					class Net(pl.LightningModule):	
-
-						def __init__(self):
-								super().__init__()
-
-								self.feature = resnet18(pretrained=True)
-								self.fc = nn.Linear(1000, 10)
-
-						def forward(self, x):
-								h = self.feature(x)
-								h = self.fc(h)
-								return h
-
-					##### 推論パート#####
+					# 推論
 					# モデルのインスタンス化（ネットワークの準備）
 					device = torch.device('cpu')
 					net = Net().to(device).eval()
@@ -176,19 +169,20 @@ def main():
 						y_label = '動物ではない'		
 
 					##表示はあとでタグ見直す
-					st.subheader('これは・・・')
+					st.subheader('これは')
 					st.write(y_label)
-					st.subheader('ですね？')
-					st.subheader('信頼度は')
-					st.write(proba_label)
-					st.subheader('%です。')
-			
-					print(1)
+					st.subheader('です。')
+
+					# """
+					# #特徴メモ
+					# """
+					
+					# # st.subheader('信頼度は')
+					# # st.write(proba_label)
+					# # st.subheader('%です。')
 
 			else:
 				st.warning("Incorrect Username/Password")	
 
-# if __name__ == '__main__'は「該当のファイルがコマンドラインから
-# スクリプトとして実行された場合にのみ以降の処理を実行する
 if __name__ == '__main__':
 	main()
