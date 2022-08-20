@@ -101,6 +101,8 @@ def main():
 				if img is not None:
 					st.image(img, use_column_width = True) 	#画像サイズを画面サイズに合わせて調整
 
+					print(0)
+
 					#＜＜＜機械学習パート＞＞＞
 					# # 前処理用の関数
 					def transform(img):
@@ -181,6 +183,8 @@ def main():
 					st.write(proba_label)
 					st.subheader('%です。')
 			
+					print(1)
+
 			else:
 				st.warning("Incorrect Username/Password")	
 
