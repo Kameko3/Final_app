@@ -5,7 +5,6 @@ import pandas as pd
 from PIL import Image
 import numpy as np
 
-import joblib
 import torch
 
 import torch.nn as nn
@@ -107,7 +106,7 @@ def main():
 		username = st.sidebar.text_input("User Name")
 		password = st.sidebar.text_input("Password",type='password')
 
-		if st.sidebar.button("Login"):
+		if st.sidebar.checkbox("Login"):
 			create_usertable()
 			hashed_pswd = make_hashes(password)
 			result = login_user(username,check_hashes(password,hashed_pswd))	
@@ -120,7 +119,7 @@ def main():
 				#画像表示
 				if img is not None:
 					st.image(img, use_column_width = True) 	#画像サイズを画面サイズに合わせて調整
-
+					
 					# 推論
 					# モデルのインスタンス化（ネットワークの準備）
 					device = torch.device('cpu')
