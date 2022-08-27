@@ -1,7 +1,3 @@
-# from random import choices
-# from secrets import choice
-# from turtle import left, right
-
 import streamlit as st
 import pandas as pd 
 from PIL import Image
@@ -148,10 +144,12 @@ def main():
 					# ラベルの設定
 					if y_arg == 0:
 						y_label = '動物ではない'
-						memo = '他の写真を読み込んでみてください'		
+						memo = '他の写真を読み込んでみてください'	
+						memo2 = ''		
 					if y_arg == 1:
 						y_label = '動物ではない'
 						memo = '他の写真を読み込んでみてください'	
+						memo2 = ''	
 					if y_arg == 2:
 						y_label = '鳥'
 						memo = '飛行を得意とした動物。体表が羽毛で覆われた恒温動物で、歯はなく、前肢が翼になって、飛翔のための適応が顕著であり、二足歩行を行う。現存する鳥類は約1万種と言われている。'	
@@ -166,7 +164,7 @@ def main():
 						memo2 = '出展:wikipedia'
 					if y_arg == 5:
 						y_label = '犬'
-						memo = '食肉目・イヌ科・イヌ属に分類される哺乳類の一種。イエイヌは人間の手によって作り出された動物群である。ジャパンケネルクラブ(JKC)では、国際畜犬連盟(FCI)が公認する331犬種を公認し、そのうち176犬種を登録してスタンダードを定めている。 なお、非公認犬種を含めると約700 - 800の犬種がいるとされている。 最も古くに家畜化されたと考えられる動物であり、現代でも、イエネコと並んで代表的なペットまたはコンパニオンアニマルとして、広く飼育され、親しまれている。ただし比較されるネコと違って独特の口臭がある。'	
+						memo = '食肉目・イヌ科・イヌ属に分類される哺乳類の一種。イエイヌは人間の手によって作り出された動物群である。非公認犬種を含めると約700 - 800の犬種がいるとされている。 最も古くに家畜化されたと考えられる動物。'	
 						memo2 = '出展:wikipedia'
 					if y_arg == 6:
 						y_label = '蛙'	
@@ -178,10 +176,12 @@ def main():
 						memo2 = '出展:wikipedia'
 					if y_arg == 8:
 						y_label = '動物ではない'
-						memo = '他の写真を読み込んでみてください'	
+						memo = '他の写真を読み込んでみてください'
+						memo2 = ''	
 					if y_arg == 9:
 						y_label = '動物ではない'	
-						memo = '他の写真を読み込んでみてください'		
+						memo = '他の写真を読み込んでみてください'	
+						memo2 = ''		
 
 					#結果表示
 					left_column, right_column = st.columns(2)
