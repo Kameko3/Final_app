@@ -1,5 +1,6 @@
 from random import choices
 from secrets import choice
+from turtle import left, right
 import streamlit as st
 import pandas as pd
 from PIL import Image
@@ -119,7 +120,7 @@ def main():
 				#画像表示
 				if img is not None:
 					st.image(img, use_column_width = True) 	#画像サイズを画面サイズに合わせて調整
-					
+
 					# 推論
 					# モデルのインスタンス化（ネットワークの準備）
 					device = torch.device('cpu')
@@ -148,33 +149,49 @@ def main():
 					# ラベルの設定
 					if y_arg == 0:
 						y_label = '動物ではない'
+						memo = '他の写真を読み込んでみてください'		
 					if y_arg == 1:
 						y_label = '動物ではない'
+						memo = '他の写真を読み込んでみてください'	
 					if y_arg == 2:
 						y_label = '鳥'
+						memo = '飛行を得意とした動物。体表が羽毛で覆われた恒温動物で、歯はなく、前肢が翼になって、飛翔のための適応が顕著であり、二足歩行を行う。現存する鳥類は約1万種と言われている。'	
+						memo2 = '出展:wikipedia'
 					if y_arg == 3:
 						y_label = '猫'
+						memo = '非常に優れた平衡感覚に、柔軟性と瞬発力のきわめて高い体の構造、武器である鋭い鉤爪（かぎづめ）や牙を持ち、足音が非常に小さく、体臭が少ない。いわゆる猫(ペットとして飼われる猫)の起源は、ネズミを捕獲させる目的で飼われ始めたリビアヤマネコの家畜化である'	
+						memo2 = '出展:wikipedia'
 					if y_arg == 4:
-						y_label = '鹿'		
+						y_label = '鹿'
+						memo = 'シカ科 (Cervidae) に属する哺乳類の総称である。約16属36種が世界中の森林などに生息している。オスは枝分かれしたツノを持ち、枝角（アントラー）と呼ばれる。多くのシカ科のメスはツノを持たないがトナカイはオスメス共にツノを持つ。オスは枝分かれしたツノを持ち、枝角（アントラー）と呼ばれる。多くのシカ科のメスはツノを持たないがトナカイはオスメス共にツノを持つ。'		
+						memo2 = '出展:wikipedia'
 					if y_arg == 5:
 						y_label = '犬'
+						memo = '食肉目・イヌ科・イヌ属に分類される哺乳類の一種。イエイヌは人間の手によって作り出された動物群である。ジャパンケネルクラブ(JKC)では、国際畜犬連盟(FCI)が公認する331犬種を公認し、そのうち176犬種を登録してスタンダードを定めている。 なお、非公認犬種を含めると約700 - 800の犬種がいるとされている。 最も古くに家畜化されたと考えられる動物であり、現代でも、イエネコと並んで代表的なペットまたはコンパニオンアニマルとして、広く飼育され、親しまれている。ただし比較されるネコと違って独特の口臭がある。'	
+						memo2 = '出展:wikipedia'
 					if y_arg == 6:
-						y_label = '蛙'		
+						y_label = '蛙'	
+						memo = '両生綱無尾目（むびもく）に分類される構成種の総称。成体の頭は三角形で、目は上に飛び出している。6,579種(日本には5科42種のカエルが生息している)ほど知られており、そのほとんどが水辺で暮らしている。'	
+						memo2 = '出展:wikipedia'
 					if y_arg == 7:
 						y_label = '馬'		
+						memo = '哺乳綱奇蹄目ウマ科ウマ属に分類される家畜動物。体長は2.4〜3m程度。体重は300〜800kg程度。寿命は約25年、稀に40年を超えることもある。'	
+						memo2 = '出展:wikipedia'
 					if y_arg == 8:
 						y_label = '動物ではない'
+						memo = '他の写真を読み込んでみてください'	
 					if y_arg == 9:
-						y_label = '動物ではない'		
+						y_label = '動物ではない'	
+						memo = '他の写真を読み込んでみてください'		
 
-					##表示はあとでタグ見直す
-					st.subheader('これは')
-					st.write(y_label)
-					st.subheader('です。')
+					#結果表示
+					left_column, right_column = st.columns(2)
+					left_column.write('動物名：')
+					right_column.subheader(y_label)
 
-					# """
-					# #特徴メモ
-					# """
+					left_column.write('特徴：')
+					st.write(memo)
+					st.write(memo2)
 					
 					# # st.subheader('信頼度は')
 					# # st.write(proba_label)
