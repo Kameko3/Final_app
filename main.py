@@ -1,17 +1,16 @@
-from random import choices
-from secrets import choice
-from turtle import left, right
+# from random import choices
+# from secrets import choice
+# from turtle import left, right
+
 import streamlit as st
-import pandas as pd
+import pandas as pd 
 from PIL import Image
 import numpy as np
 
 import torch
-
 import torch.nn as nn
 import torch.nn.functional as F
 import pytorch_lightning as pl
-import torch.nn as nn
 from torchvision import transforms
 from torchvision.models import resnet18
 
