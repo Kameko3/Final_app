@@ -54,7 +54,7 @@ def transform(img):
 	])
 	return _transform(img)
 
-#学習モデル
+#推論モデル　（ここは別ファイルでimportの方がきれい）
 class Net(pl.LightningModule):	
 
 	def __init__(self):
